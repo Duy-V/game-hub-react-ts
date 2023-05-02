@@ -5,7 +5,8 @@ import { CanceledError } from "axios";
 
 export interface Genre{
     id: number;
-    name: string
+    name: string;
+    image_background: string;
 }
 interface FetchGenreResponse {
     count: number;
