@@ -11,11 +11,16 @@ interface Props {
 function PlatformSelector({onSelectPlatform, selectedPlatform}: Props) {
     const {data, error} = usePlatforms()
     if(error) return null
+    
+    // const currentSortOrder:any = data.find((platform) => platform === selectedPlatform);
   return (
     <Menu>
-      <MenuButton as={Button} rightIcon={<BsChevronDown/>}></MenuButton>
-      <MenuList>
-        {data.map(platform => <MenuItem onClick={() => onSelectPlatform(platform)} key={platform.id}>{platform.name}</MenuItem>)}
+      <MenuButton as={Button} rightIcon={<BsChevronDown />}>
+        Order by: {selectedPlatform?.name}
+      </MenuButton>
+      <MenuList role="tablist">
+      <MenuItem>Sort Platform</MenuItem>
+        {data.map(platform => <MenuItem role="tab" aria-selected={true} backgroundColor={platform.name === selectedPlatform?.name ? "black" : ""} onClick={() => onSelectPlatform(platform)} key={platform.id}>{platform.name}</MenuItem>)}
       </MenuList>
     </Menu>
   )

@@ -10,7 +10,8 @@ import {
 } from "@chakra-ui/react";
 import useGenres, { Genre } from "../hooks/useGenres";
 import getCroppedImageUrl from "../services/image-url";
-
+import { useEffect } from "react";
+import _isEqual from "lodash/isEqual";
 interface Props {
   onSelectGenre: (genre: Genre) => void;
   selectedGenre: Genre | null;
@@ -22,6 +23,13 @@ const GenreList = ({ selectedGenre, onSelectGenre }: Props) => {
   if (error) return null;
 
   if (isLoading) return <Spinner />;
+  // let genre = {};
+  // selectedGenre = genre
+  const handleGetGenre = (genre: Genre) => {
+    if (!_isEqual(genre, selectedGenre)) {
+      onSelectGenre(genre);
+    }
+  };
 
   return (
     <>
@@ -42,7 +50,7 @@ const GenreList = ({ selectedGenre, onSelectGenre }: Props) => {
                 whiteSpace="normal"
                 textAlign="left"
                 fontWeight={genre.id === selectedGenre?.id ? "bold" : "normal"}
-                onClick={() => onSelectGenre(genre)}
+                onClick={() => handleGetGenre(genre)}
                 fontSize="md"
                 variant="link"
               >
