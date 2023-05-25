@@ -1,9 +1,9 @@
-// useLoading.ts
+// useLoading.ts adding
 import { useState } from "react";
 
-type UseLoadingType = () => [boolean, () => void, () => void];
+// type UseLoadingType = () => [boolean, () => void, () => void];
 
-const useLoading: UseLoadingType = () => {
+const useLoading = () => {
   const [isLoading, setIsLoading] = useState(false);
 
   const startLoading = () => {
@@ -14,7 +14,7 @@ const useLoading: UseLoadingType = () => {
     setIsLoading(false);
   };
 
-  return [isLoading, startLoading, stopLoading];
+  return { isLoading, startLoading, stopLoading };
 };
 
 export default useLoading;

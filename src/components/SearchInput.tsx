@@ -10,24 +10,17 @@ interface Props {
 
 const SearchInput = ({ onSearch }: Props) => {
   const [input, setInput] = useState("");
-  const [debouncedInput, setDebouncedInput] = useState("");
 
   useEffect(() => {
     const handler = setTimeout(() => {
-      setDebouncedInput(input);
-    }, 5000);
+      onSearch(input);
+    }, 300);
 
     return () => {
       clearTimeout(handler);
     };
   }, [input]);
 
-  useEffect(() => {
-    if (debouncedInput) {
-      onSearch(debouncedInput);
-    }
-  }, [debouncedInput]);
-  console.log(debouncedInput);
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     e.preventDefault();
     setInput(e.target.value);

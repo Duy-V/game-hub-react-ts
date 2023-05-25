@@ -17,7 +17,7 @@ function GameList({ gameQuery }: Props) {
 
   return (
     <>
-      {error && <Text>{error}</Text>}
+      {error && <Text>{error.message}</Text>}
       <VStack spacing={3} padding="10px" align="stretch">
         {isLoading &&
           skeletons.map((skeleton) => (
@@ -25,7 +25,7 @@ function GameList({ gameQuery }: Props) {
               <GameCardSkeleton />
             </GameCardContainer>
           ))}
-        {data.map((game) => (
+        {data?.results.map((game) => (
           <GameCardContainer key={game.id}>
             <GameCard game={game} />
           </GameCardContainer>
